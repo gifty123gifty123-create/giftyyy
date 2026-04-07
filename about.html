@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysea | About & Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --rose-gold-gradient: linear-gradient(to right, #b76e79, #f7cac9, #dfbe9f, #b76e79);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            transition: all .3s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #0a0a0a;
+            min-height: 100vh;
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+        }
+
+        /* ===== UNIVERSAL HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 20px 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(183, 110, 121, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar { display: flex; gap: 60px; }
+
+        .navbar a {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #7a3f48, #b76e79, #9a6a54, #7a3f48);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px; left: 50%;
+            transform: translateX(-50%);
+            width: 0%; height: 2px;
+            background: var(--rose-gold-gradient);
+            transition: 0.3s ease;
+        }
+
+        .navbar a:hover::after { width: 100%; }
+
+        /* ===== BACKGROUND & PARTICLES ===== */
+        .back-video {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: -2;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+        }
+
+        .particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(2px 2px at 100px 50px, rgba(247,202,201,0.4), transparent),
+                radial-gradient(2px 2px at 300px 250px, rgba(223,190,159,0.4), transparent),
+                radial-gradient(2px 2px at 500px 300px, rgba(183,110,121,0.4), transparent);
+            background-size: 550px 400px;
+            animation: floatParticles 20s linear infinite;
+        }
+
+        @keyframes floatParticles {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-400px); }
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .main-container {
+            padding: 140px 7% 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-section {
+            width: 100%;
+            max-width: 1000px;
+            padding: 50px;
+            margin-bottom: 40px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(183, 110, 121, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            text-align: center;
+        }
+
+        .heading {
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            background: var(--rose-gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* About Section Row */
+        .about .row { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: center; }
+        .about .video-container video { width: 100%; max-width: 380px; border-radius: 20px; border: 1px solid rgba(183, 110, 121, 0.4); }
+        .about .content { flex: 1; min-width: 300px; text-align: left; }
+        .about .content h3 { font-family: 'Cinzel', serif; font-size: 28px; margin-bottom: 15px; color: #f7cac9; }
+        .about .content p { font-size: 19px; line-height: 1.8; color: rgba(247, 202, 201, 0.8); }
+
+        /* ===== HORIZONTAL ICONS ROW ===== */
+        .icons-container { 
+            display: flex; 
+            flex-direction: row; 
+            flex-wrap: nowrap; 
+            gap: 20px; 
+            justify-content: center; 
+            width: 100%; 
+            max-width: 1000px;
+            margin-bottom: 20px; /* Pulls it closer to the box below */
+        }
+
+        .icons {
+            flex: 1;
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(183, 110, 121, 0.2);
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .icons i { font-size: 35px; margin-bottom: 12px; background: var(--rose-gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .icons h3 { font-family: 'Cinzel', serif; font-size: 18px; color: #f7cac9; margin-bottom: 3px; }
+        .icons span { font-size: 14px; color: rgba(247, 202, 201, 0.6); }
+
+        /* Best Product Re-Alignment */
+        .best-product { margin-top: 0; }
+        .product-card { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: center; }
+        .product-image img { width: 280px; border-radius: 20px; border: 1px solid rgba(183, 110, 121, 0.4); }
+        .product-info { text-align: left; flex: 1; min-width: 300px; }
+        .product-info h3 { font-family: 'Cinzel', serif; font-size: 32px; color: #f7cac9; }
+        .stars { color: #dfbe9f; margin: 10px 0; }
+        .price { font-size: 28px; color: #f7cac9; margin: 15px 0; font-family: 'Cinzel'; }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 35px;
+            border-radius: 30px;
+            border: 1px solid #b76e79;
+            color: #b76e79;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            background: transparent;
+        }
+        .btn:hover { background: #b76e79; color: #fff; box-shadow: 0 0 20px rgba(183, 110, 121, 0.4); transform: scale(1.05); }
+
+        /* Contact Form Styling */
+        .contact form { width: 100%; max-width: 600px; margin: auto; }
+        .input-box { position: relative; margin: 20px 0; }
+        .input-box input, .input-box textarea {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(183, 110, 121, 0.3);
+            border-radius: 30px;
+            color: #f7cac9;
+            font-size: 16px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .input-box i { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: #b76e79; font-size: 20px; }
+        .input-box textarea { border-radius: 20px; height: 120px; resize: none; }
+
+        /* Responsive Fixes */
+        @media (max-width: 850px) {
+            .icons-container { flex-direction: column; align-items: center; }
+            .icons { width: 100%; }
+            .navbar { display: none; }
+            .about .row, .product-card { text-align: center; }
+            .about .content, .product-info { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="hie.jpg" class="back-video" alt="background">
+    <div class="particles"></div>
+
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="products.html">Products</a>
+            <a href="#contact">Contact</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+
+        <section class="glass-section about" id="about">
+            <h1 class="heading">About Us</h1>
+            <div class="row">
+                <div class="video-container">
+                    <video src="atheraorg.mp4" loop autoplay muted></video>
+                </div>
+                <div class="content">
+                    <h3>The Elysea Essence</h3>
+                    <p>Elysea was created with the belief that every woman has a goddess within her. Our perfumes are inspired by the timeless beauty of Greek mythology, crafted to invoke the spirit of love, mystery, and elegance.</p>
+                    <a href="#" class="btn">Discover More</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="icons-container">
+            <div class="icons">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Free Delivery</h3>
+                <span>On all orders</span>
+            </div>
+            <div class="icons">
+                <i class="fas fa-undo"></i>
+                <h3>10 Days Returns</h3>
+                <span>Easy Guarantee</span>
+            </div>
+            <div class="icons">
+                <i class="fas fa-gift"></i>
+                <h3>Luxury Gifts</h3>
+                <span>With every purchase</span>
+            </div>
+        </section>
+
+        <section class="glass-section best-product" id="best">
+            <h1 class="heading">Signature Scent</h1>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="image/persephone.jpeg" alt="underworld bloom">
+                </div>
+                <div class="product-info">
+                    <h3>Underworld Bloom</h3>
+                    <div class="stars">★★★★★ <span>(250+ reviews)</span></div>
+                    <p>Inspired by Persephone, this fragrance captures the ethereal transition from shadow to spring with notes of dark pomegranate and fresh flora.</p>
+                    <div class="price">$45.99</div>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-section contact" id="contact">
+            <h1 class="heading">Contact Us</h1>
+            <form action="">
+                <div class="input-box">
+                    <input type="text" placeholder="Your Name" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" placeholder="Your Email" required>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="input-box">
+                    <textarea placeholder="Tell us your thoughts..."></textarea>
+                    <i class='bx bxs-message-detail' style="top: 25px; transform: none;"></i>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </div>
+  <script src="elysea-cart.js"></script>
+</body>
+</html>

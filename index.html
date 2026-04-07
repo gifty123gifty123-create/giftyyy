@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysea | The Essence of Elegance</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        :root {
+            --rose-gold: #b76e79;
+            --soft-pink: #f7cac9;
+            --golden-beige: #dfbe9f;
+            --rose-gold-gradient: linear-gradient(to right, #b76e79, #f7cac9, #dfbe9f, #b76e79);
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            transition: all 0.5s ease;
+        }
+
+        /* Snap Scroll Setup */
+        html { 
+            scroll-behavior: smooth; 
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            background: #0a0a0a;
+            font-family: 'Cormorant Garamond', serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ============ BACKGROUND & PARTICLES ============ */
+        .back-video {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            /* Same dark effect used here */
+            filter: brightness(0.35); 
+        }
+
+        .particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(2px 2px at 100px 50px, rgba(247, 202, 201, 0.4), transparent),
+                radial-gradient(2px 2px at 300px 250px, rgba(223, 190, 159, 0.4), transparent),
+                radial-gradient(2px 2px at 500px 300px, rgba(183, 110, 121, 0.4), transparent);
+            background-size: 550px 400px;
+            animation: floatParticles 20s linear infinite;
+        }
+
+        @keyframes floatParticles {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-400px); }
+        }
+
+        /* ============ FIXED HEADER ============ */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 20px 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(183, 110, 121, 0.3);
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar { display: flex; gap: 60px; }
+        .navbar a {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: var(--rose-gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        /* ============ FULL PAGE SECTIONS ============ */
+        section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 7%;
+            scroll-snap-align: start;
+        }
+
+        .glass-box {
+            width: 100%;
+            max-width: 1100px;
+            height: 85vh;
+            padding: 40px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(183, 110, 121, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        /* PRODUCT PAGE HOVER EFFECT (Glow & Zoom) */
+        .product-section:hover .glass-box {
+            transform: scale(1.05);
+            border-color: rgba(247, 202, 201, 0.8);
+            box-shadow: 0 0 50px rgba(183, 110, 121, 0.6), 
+                        0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        /* ============ HOME PAGE ============ */
+        .home h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 90px;
+            letter-spacing: 15px;
+            background: var(--rose-gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .home span {
+            font-family: 'Cinzel', serif;
+            color: var(--soft-pink);
+            font-size: 24px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        /* ============ PRODUCT PAGE CONTENT ============ */
+        .product-image {
+            height: 60vh;
+            width: 100%;
+            object-fit: contain;
+            margin-bottom: 20px;
+            
+            /* --- THE DARK EFFECT --- */
+            /* 1. Added drop-shadow back for depth */
+            /* 2. Added brightness(0.4) to match the back-video brightness */
+            /* 3. Added contrast(1.2) so the bottles don't look completely washed out in the dark */
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8)) 
+                    brightness(0.4) 
+                    contrast(1.2);
+            
+            transition: all 0.5s ease;
+        }
+
+        /* When hovering, the bottle zooms in and becomes slightly brighter */
+        .product-section:hover .product-image {
+            transform: translateY(-10px) scale(1.05);
+            
+            /* We brighten them slightly on hover so they 'pop' when selected */
+            filter: drop-shadow(0 20px 40px rgba(183, 110, 121, 0.5)) 
+                    brightness(0.8) 
+                    contrast(1.1);
+        }
+
+        .info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            letter-spacing: 4px;
+            background: var(--rose-gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 32px;
+            color: var(--golden-beige);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styling */
+        .btn {
+            display: inline-block;
+            padding: 15px 45px;
+            border-radius: 40px;
+            border: 2px solid var(--rose-gold);
+            color: var(--rose-gold);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            font-size: 16px;
+            font-weight: bold;
+            background: transparent;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .btn:hover {
+            background: var(--rose-gold);
+            color: white;
+            box-shadow: 0 0 30px rgba(183, 110, 121, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media(max-width: 768px) {
+            .home h3 { font-size: 50px; }
+            .product-image { height: 40vh; }
+            .info h3 { font-size: 28px; }
+            .navbar { gap: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="hie.jpg" class="back-video" alt="Elysea Background Video">
+    <div class="particles"></div>
+
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="products.html">Products</a>
+            <a href="about.html#contact">Contact</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <section class="home">
+        <div class="glass-box">
+            <h3>Elysea</h3>
+            <span>The Essence of Elegance</span>
+            <p style="margin-top: 20px; font-size: 22px; max-width: 600px; color: rgba(247, 202, 201, 0.8);">A collection where every scent tells a story of power, grace, and ancient beauty.</p>
+            <a href="#prod1" class="btn" style="margin-top: 30px;">Begin the Journey</a>
+        </div>
+    </section>
+
+    <section id="prod1" class="product-section">
+        <div class="glass-box">
+            <img src="perfume 1.jpeg" class="product-image" alt="Siren Elixirs">
+            <div class="info">
+                <h3>Siren Elixirs</h3>
+                <div class="price">$120</div>
+                <button class="btn">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="prod2" class="product-section">
+        <div class="glass-box">
+            <img src="perfume 2.jpeg" class="product-image" alt="White Moon Mist">
+            <div class="info">
+                <h3>White Moon Mist</h3>
+                <div class="price">$150</div>
+                <button class="btn">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="prod3" class="product-section">
+        <div class="glass-box">
+            <img src="perfume 3.jpeg" class="product-image" alt="Wisdom Bloom">
+            <div class="info">
+                <h3>Wisdom Bloom</h3>
+                <div class="price">$135</div>
+                <button class="btn">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="prod4" class="product-section">
+        <div class="glass-box">
+            <img src="perfume 4.jpeg" class="product-image" alt="Pearl Of Love">
+            <div class="info">
+                <h3>Pearl Of Love</h3>
+                <div class="price">$110</div>
+                <button class="btn">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="prod5" class="product-section">
+        <div class="glass-box">
+            <img src="perfume 5.jpeg" class="product-image" alt="Inner Haven">
+            <div class="info">
+                <h3>Inner Haven</h3>
+                <div class="price">$125</div>
+                <button class="btn">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+  <script src="elysea-cart.js"></script>
+</body>
+</html>

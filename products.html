@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysea - Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            min-height: 100vh;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* ============ UNIVERSAL HEADER ============ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(183, 110, 121, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .navbar a {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #7a3f48, #b76e79, #9a6a54, #7a3f48);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            transition: 0.3s ease;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(to right, #b76e79, #f7cac9, #dfbe9f);
+            border-radius: 10px;
+            transition: 0.3s ease;
+        }
+
+        .navbar a:hover::after { width: 100%; }
+        .navbar a:hover { filter: drop-shadow(0 0 10px rgba(247, 202, 201, 0.6)); }
+
+        /* IMAGE BACKGROUND */
+        .back-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+        }
+
+        /* FLOATING PARTICLES */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(2px 2px at 100px 50px, rgba(247,202,201,0.4), transparent),
+                radial-gradient(2px 2px at 300px 250px, rgba(223,190,159,0.4), transparent),
+                radial-gradient(2px 2px at 500px 300px, rgba(183,110,121,0.4), transparent);
+            background-size: 550px 400px;
+            animation: floatParticles 20s linear infinite;
+        }
+
+        @keyframes floatParticles {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-400px); }
+        }
+
+        /* PRODUCTS GRID */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 140px 7% 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* PRODUCT CARD */
+        .card {
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(183, 110, 121, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(183, 110, 121, 0.7);
+            box-shadow: 0 15px 40px rgba(183, 110, 121, 0.2);
+        }
+
+        .discount {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(183, 110, 121, 0.8);
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            color: #fff;
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+
+        .card:hover img { transform: scale(1.05); }
+
+        .info { padding: 20px; text-align: center; }
+
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #b76e79, #f7cac9, #dfbe9f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .price { font-size: 18px; color: #f7cac9; }
+        .price span { text-decoration: line-through; opacity: 0.5; font-size: 14px; margin-left: 10px; }
+
+        .cart-bar {
+            margin: 15px;
+            padding: 12px;
+            border-radius: 30px;
+            border: 1px solid #b76e79;
+            color: #b76e79;
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cart-bar:hover { background: #b76e79; color: #fff; }
+
+        @media (max-width: 992px) { .products { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 650px) { .products { grid-template-columns: 1fr; } .navbar { gap: 20px; } }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="products.html">Products</a>
+            <a href="about.html#contact">Contact</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <img src="hie.jpg" class="back-image" alt="Background">
+    <div class="particles"></div>
+
+    <div class="products">
+        <div class="card">
+            <div class="discount">20% OFF</div>
+            <img src="perfume 12.jpeg">
+            <div class="info">
+                <div class="title">Aphrodite</div>
+                <div class="price">$150.00 <span>$200.00</span></div>
+            </div>
+            <div class="cart-bar">Add To Cart</div>
+        </div>
+
+        <div class="card">
+            <div class="discount">17% OFF</div>
+            <img src="artemis.jpeg">
+            <div class="info">
+                <div class="title">Artemis</div>
+                <div class="price">$13.99 <span>$16.99</span></div>
+            </div>
+            <div class="cart-bar">Add To Cart</div>
+        </div>
+
+        <div class="card">
+            <div class="discount">15% OFF</div>
+            <img src="athena.jpeg">
+            <div class="info">
+                <div class="title">Athena</div>
+                <div class="price">$12.99 <span>$15.99</span></div>
+            </div>
+            <div class="cart-bar">Add To Cart</div>
+        </div>
+
+        <div class="card">
+            <div class="discount">18% OFF</div>
+            <img src="hectate.jpeg">
+            <div class="info">
+                <div class="title">Hecate</div>
+                <div class="price">$14.99 <span>$17.99</span></div>
+            </div>
+            <div class="cart-bar">Add To Cart</div>
+        </div>
+
+        <div class="card">
+            <div class="discount">10% OFF</div>
+            <img src="hestia.jpeg">
+            <div class="info">
+                <div class="title">Hestia</div>
+                <div class="price">$11.99 <span>$13.99</span></div>
+            </div>
+            <div class="cart-bar">Add To Cart</div>
+        </div>
+
+        <div class="card">
+            <div class="discount">5% OFF</div>
+            <img src="persephone.jpeg">
+            <div class="info">
+                <div class="title">Persephone</div>
+                <div class="price">$12.99 <span>$13.99</span></div>
+            </div>
+            <div class="cart-bar">Add To Cart</div>
+        </div>
+    </div>
+
+  <script src="elysea-cart.js"></script>
+</body>
+</html>
